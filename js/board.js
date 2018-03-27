@@ -9,7 +9,18 @@ var board = {
 
 $('.create-column')
   .click(function () {
-    board.createColumn(new Column(prompt('Wpisz nazwę kolumny')));
+    let columnName = prompt('Enter column name');
+    $.ajax({
+      url: baseUrl + '/column',
+      method: 'POST',
+      data: {
+        name: columnName,
+      },
+      success: function(response){
+        const column = new Column(response.id, columnName);
+        board.createColumn(column);
+      }
+    });
   });
 
 function initSortable() {
