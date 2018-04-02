@@ -1,7 +1,7 @@
 var board = {
   name: 'Tablica Kanban',
   createColumn: function (column) {
-    this.element.append(column.element);
+    this.element.append(column.$element);
     initSortable();
   },
   element: $('#board .column-container')
@@ -13,7 +13,7 @@ $('.create-column')
     $.ajax({
       url: baseUrl + '/column',
       method: 'POST',
-      data: {
+      data: { // dlaczego data?
         name: columnName,
       },
       success: function(response){
