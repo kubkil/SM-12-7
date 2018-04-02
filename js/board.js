@@ -5,7 +5,7 @@ var board = {
     initSortable();
   },
   element: $('#board .column-container')
-};
+}
 
 $('.create-column')
   .click(function () {
@@ -13,10 +13,10 @@ $('.create-column')
     $.ajax({
       url: baseUrl + '/column',
       method: 'POST',
-      data: { // dlaczego data?
+      data: {
         name: columnName,
       },
-      success: function(response){
+      success: function (response){
         const column = new Column(response.id, columnName);
         board.createColumn(column);
       }
