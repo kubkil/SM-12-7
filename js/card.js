@@ -22,12 +22,12 @@ function Card(id, name) {
   }
 }
 Card.prototype = {
-  removeCard: function() {
+  removeCard: function () {
     const self = this;
     $.ajax({
-      url:  baseUrl + '/card/' + self.id,
+      url: baseUrl + '/card/' + self.id,
       method: 'DELETE',
-      success: function() {
+      success: function () {
         self.element.remove();
       }
     });
