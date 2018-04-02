@@ -1,7 +1,8 @@
 function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawiasach?
+  const self = this;
   this.id = id;
   this.name = name || 'No name given';
-}
+  this.$element = createColumn();
 
   function createColumn() {
     // TWORZENIE NOWYCH WĘZŁÓW
@@ -17,7 +18,7 @@ function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawias
     });
 
     columnAddCard.click(function(event) {
-      let cardName = prompt('Enter the name of the card')
+      let cardName = prompt('Enter the name of the card');
       event.preventDefault();
       $.ajax({
         url: baseUrl + '/card',
@@ -40,10 +41,11 @@ function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawias
       .append(columnCardList);
     return column;
   }
+}
 
 Column.prototype = {
   createCard: function (card) {
-    this.element.children('ul').append(card.element);
+    this.$element.children('ul').append(card.element);
   },
   deleteColumn: function () {
     const self = this;
@@ -51,7 +53,7 @@ Column.prototype = {
       url: baseUrl + '/column/' + self.id,
       method: 'DELETE',
       success: function(response) {
-        self.element.remove();
+        self.$element.remove();
       }
     });
   }
