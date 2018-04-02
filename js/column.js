@@ -1,4 +1,4 @@
-function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawiasach?
+function Column(id, name) {
   const self = this;
   this.id = id;
   this.name = name || 'No name given';
@@ -17,7 +17,7 @@ function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawias
       self.deleteColumn();
     });
 
-    columnAddCard.click(function(event) {
+    columnAddCard.click(function (event) {
       let cardName = prompt('Enter the name of the card');
       event.preventDefault();
       $.ajax({
@@ -27,7 +27,7 @@ function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawias
           name: cardName,
           bootcamp_kanban_column_id: self.id
         },
-        success: function(response) {
+        success: function (response) {
           const card = new Card(response.id, cardName);
           self.createCard(card);
         }
@@ -36,9 +36,9 @@ function Column(id, name) { // jakie id i jakie name, skąd się bierze w nawias
 
     // KONSTRUOWANIE ELEMENTU KOLUMNY
     column.append(columnTitle)
-      .append(columnDelete)
-      .append(columnAddCard)
-      .append(columnCardList);
+    column.append(columnDelete)
+    column.append(columnAddCard)
+    column.append(columnCardList);
     return column;
   }
 }
@@ -52,7 +52,7 @@ Column.prototype = {
     $.ajax({
       url: baseUrl + '/column/' + self.id,
       method: 'DELETE',
-      success: function(response) {
+      success: function (response) {
         self.$element.remove();
       }
     });
