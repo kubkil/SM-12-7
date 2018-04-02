@@ -12,13 +12,13 @@ $.ajaxSetup({
 $.ajax({
   url: baseUrl + '/board',
   method: 'GET',
-  success: function(response) { // co robi tutaj to response?
+  success: function (response) {
     setupColumns(response.columns);
   }
 });
 
 function setupColumns(columns) {
-  columns.forEach(function(column) {
+  columns.forEach(function (column) {
     const col = new Column(column.id, column.name);
     board.createColumn(col);
     setupCards(col, column.cards);
@@ -26,8 +26,8 @@ function setupColumns(columns) {
 }
 
 function setupCards(col, cards) {
-  cards.forEach(function(card) {
+  cards.forEach(function (card) {
     const cardObj = new Card(card.id, card.name, card.bootcamp_kanban_column_id);
     col.createCard(cardObj);
-  })
+  });
 }
